@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.service;
 
+import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
@@ -9,13 +10,13 @@ import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
-    UserDaoJDBCImpl userDAO;
+    private final UserDao userDAO;
 
-    {
+    public UserServiceImpl() {
         try {
-            userDAO = new UserDaoJDBCImpl();
+            this.userDAO = new UserDaoJDBCImpl();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to initialize UserDao", e);
         }
     }
 
